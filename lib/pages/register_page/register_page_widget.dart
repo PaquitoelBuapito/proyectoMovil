@@ -1,8 +1,6 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/home_page/home_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,8 +26,8 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
     _model = createModel(context, () => RegisterPageModel());
 
     _model.inputNormalController ??= TextEditingController();
-    _model.passwordTextController ??= TextEditingController();
-    _model.confirmPasswordTextController ??= TextEditingController();
+    _model.textController2 ??= TextEditingController();
+    _model.textController3 ??= TextEditingController();
   }
 
   @override
@@ -156,7 +154,7 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 0.0),
                     child: TextFormField(
-                      controller: _model.passwordTextController,
+                      controller: _model.textController2,
                       obscureText: !_model.passwordVisibility1,
                       decoration: InputDecoration(
                         labelText: 'Contraseña',
@@ -218,8 +216,8 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
                             fontFamily: 'Overpass',
                             color: Color(0xFF14181B),
                           ),
-                      validator: _model.passwordTextControllerValidator
-                          .asValidator(context),
+                      validator:
+                          _model.textController2Validator.asValidator(context),
                     ),
                   ),
                 ),
@@ -233,7 +231,7 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
                     child: TextFormField(
-                      controller: _model.confirmPasswordTextController,
+                      controller: _model.textController3,
                       obscureText: !_model.passwordVisibility2,
                       decoration: InputDecoration(
                         labelText: 'Confirma Contraseña',
@@ -295,8 +293,8 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
                             fontFamily: 'Overpass',
                             color: FlutterFlowTheme.of(context).primary,
                           ),
-                      validator: _model.confirmPasswordTextControllerValidator
-                          .asValidator(context),
+                      validator:
+                          _model.textController3Validator.asValidator(context),
                     ),
                   ),
                 ),
@@ -309,35 +307,8 @@ class _RegisterPageWidgetState extends State<RegisterPageWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FFButtonWidget(
-                    onPressed: () async {
-                      if (_model.passwordTextController.text !=
-                          _model.confirmPasswordTextController.text) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Passwords don\'t match!',
-                            ),
-                          ),
-                        );
-                        return;
-                      }
-
-                      final user = await authManager.createAccountWithEmail(
-                        context,
-                        _model.inputNormalController.text,
-                        _model.passwordTextController.text,
-                      );
-                      if (user == null) {
-                        return;
-                      }
-
-                      await Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePageWidget(),
-                        ),
-                        (r) => false,
-                      );
+                    onPressed: () {
+                      print('Button pressed ...');
                     },
                     text: 'Crear Cuenta',
                     options: FFButtonOptions(
